@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { isPositiveNumber } from "../../helpers/validators";
+import * as SC from "./styles"
+import { Typo } from "../UI/Typo";
+import { Input } from "../UI/Input";
+import { Button } from "../UI/Button";
 
 export const ProgramForm = ( { onSave } ) => {
   const [cycles, setCycles] = useState('');
@@ -42,47 +46,50 @@ export const ProgramForm = ( { onSave } ) => {
   
 
   return (
-    <form onSubmit={handleSubmit} noValidate>
-      <div>
-        <label>
-          Количество циклов (n):
-          <input 
-            type="number"
-            min="1"
-            step="1"
-            value={cycles}
-            onChange={(e) => setCycles(e.target.value)}
-          />
-        </label>
-        { errors.cycles && <div>{errors.cycles}</div> }
-      </div>
-      <div>
-        <label>
-          Продолжительность работы (секунд):
-          <input
-            type="number"
-            min="1"
-            step="1"
-            value={workDuration}
-            onChange={(e) => setWorkDuration(e.target.value)}
-          />
-          { errors.workDuration && <div>{errors.workDuration}</div> }
-        </label>
-      </div>
-      <div>
-        <label>
-          Длительность отдыха (секунд):
-          <input
-            type="number"
-            min="1"
-            step="1"
-            value={restDuration}
-            onChange={(e) => setRestDuration(e.target.value)}
-          />
-          { errors.workDuration && <div>{errors.restDuration}</div> }
-        </label>
-      </div>
-      <button type="submit">Сохранить программу</button>
-    </form>
+    <div>
+      <Typo>Создать программу</Typo>
+      <SC.Form onSubmit={handleSubmit} noValidate>
+        <div>
+          <label>
+            <SC.LabelText>Количество циклов (n): </SC.LabelText>
+            <Input 
+              type="number"
+              min="1"
+              step="1"
+              value={cycles}
+              onChange={(e) => setCycles(e.target.value)}
+            />
+          </label>
+          { errors.cycles && <div>{errors.cycles}</div> }
+        </div>
+        <div>
+          <label>
+            <SC.LabelText>Продолжительность работы (секунд): </SC.LabelText>
+            <Input
+              type="number"
+              min="1"
+              step="1"
+              value={workDuration}
+              onChange={(e) => setWorkDuration(e.target.value)}
+            />
+            { errors.workDuration && <div>{errors.workDuration}</div> }
+          </label>
+        </div>
+        <div>
+          <label>
+            <SC.LabelText>Длительность отдыха (секунд): </SC.LabelText>
+            <Input
+              type="number"
+              min="1"
+              step="1"
+              value={restDuration}
+              onChange={(e) => setRestDuration(e.target.value)}
+            />
+            { errors.workDuration && <div>{errors.restDuration}</div> }
+          </label>
+        </div>
+        <Button type="submit" text='Сохранить программу' />
+      </SC.Form>
+    </div>
   )
 }
