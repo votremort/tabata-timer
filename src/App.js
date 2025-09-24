@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import * as SC from "./styles";
+
+import { Container } from './components/UI/Container';
 
 import { ProgramForm } from './components/ProgramForm';
 import { Timer } from './components/Timer';
 import { ProgramList } from './components/ProgramList';
 
-import { 
-  loadPrograms, saveProgram, 
-  deleteProgram, updateProgram
-} from './helpers/localStorage';
+import { loadPrograms, saveProgram, deleteProgram } from './helpers/localStorage';
 
 function App() {
   //сохраненные программы
@@ -25,8 +25,6 @@ function App() {
     const savedPrograms = loadPrograms();
     setPrograms(savedPrograms);
   }, []);
-
-
 
   //сохранение новой программы через ProgramForm
   const handleSaveProgram = (programData) => {
@@ -62,36 +60,36 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>tabata timer</h1>
-      <section>
-        <h2>Создать программу</h2>
-        <ProgramForm onSave={handleSaveProgram} />
-      </section>
-      <section>
-        <h2>Доступные программы</h2>
-        <ProgramList 
-          programs={programs}
-          setPrograms={setPrograms}
-          onSelect={handleSelectProgram}
-          onDelete={handleDeleteProgram}
-          refreshPrograms={refreshPrograms}
-        />
-      </section>
-      <section>
-        <h2>Таймер</h2>
-        {currentProgram ? (
-          <Timer
-            key={timerKey}
-            program={currentProgram}
-          />
-        ) : (
-          <p>Выберите или создайте программу для запуска таймера</p>
-        )}
-     
-      </section>
-      
-    </div>
+    <Container>
+      <div className="App">
+        <SC.AppTitle> Tabata - timer</SC.AppTitle>
+        <SC.TimerAndListWrapper>
+          <SC.Section>
+            {currentProgram ? (
+              <Timer
+                key={timerKey}
+                program={currentProgram}
+              />
+            ) : (
+              <p>Выберите или создайте программу для запуска таймера</p>
+            )}
+          </SC.Section>
+          <SC.Section>
+            <ProgramList 
+              programs={programs}
+              setPrograms={setPrograms}
+              onSelect={handleSelectProgram}
+              onDelete={handleDeleteProgram}
+              refreshPrograms={refreshPrograms}
+            />
+          </SC.Section>
+        </SC.TimerAndListWrapper>
+        <SC.Section>
+          <ProgramForm onSave={handleSaveProgram} />
+        </SC.Section>
+      </div>
+    </Container>
+
   );
 }
 

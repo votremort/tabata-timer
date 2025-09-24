@@ -1,40 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { loadPrograms, deleteProgram, updateProgram } from "../../helpers/localStorage";
+import React, { useEffect } from "react";
+import * as SC from "./styles"
+import { Typo } from "../UI/Typo";
+import { Button } from "../UI/Button";
 
 export const ProgramList = ({ onSelect, programs, setPrograms, refreshPrograms, onDelete }) => {
-  // const [programs, setPrograms] = useState([]);
-
-  // const refreshPrograms = () => {
-  //   setPrograms(loadPrograms());
-  // };
 
   useEffect(() => {
     refreshPrograms();
   }, []);
 
-  //  const handleDelete = (id) => {
-  //   if (window.confirm('Удалить программу?')) {
-  //     deleteProgram(id);
-  //     refreshPrograms();
-  //   }
-  // };
-
   return (
     <div>
-      <h3>Сохраненные программы</h3>
+      <Typo>Сохраненные программы</Typo>
       {programs.length === 0 && <p>Нет сохраненных программ</p>}
-      <ul>
+      <SC.List>
         {programs.map((program) => (
-          <li key={program.id}>
+          <SC.ListItem key={program.id}>
             <div>
               <b>Циклы: </b> {program.cycles}, <b>Работа (сек): </b> {program.workDuration}, {' '}
               <b>Отдых (сек):</b> {program.restDuration}
             </div>
-          <button onClick={() => onSelect(program)}>Запустить</button>{'  '}
-          <button onClick={() => onDelete(program.id)}>Удалить</button>
-          </li>
+            <SC.ButtonWrapper>
+              <Button onClick={() => onSelect(program)} text='Запустить' />
+              <Button onClick={() => onDelete(program.id)} text='Удалить' />
+            </SC.ButtonWrapper>
+          </SC.ListItem>
         ))}
-      </ul>
+      </SC.List>
     </div>
   )
 }

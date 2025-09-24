@@ -1,5 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
+
+import * as SC from "./styles";
+import { Typo } from "../UI/Typo";
+import { Button } from "../UI/Button";
+
 import { playBeep } from "../../helpers/playSound";
+
 const PHASES = {
   WORK: 'Работа',
   REST: 'Отдых',
@@ -95,14 +101,17 @@ export const Timer = ({ program }) => {
 
   return(
     <div>
-      <h3>Таймер</h3> 
+      <Typo>Таймер</Typo> 
       <p>Текущая фаза: <b>{phase}</b></p>
       <p>
         Цикл: {currentCycle} из {program.cycles}
       </p>
       <p>Осталось времени: {formatTime(timeLeft)}</p>
-      <button onClick={toggleRunning}>{isRunning ? 'Пауза' : 'Старт'}</button>
-      <button onClick={reset}>Сброс</button>
+      <SC.ButtonWrapper>
+        <Button onClick={toggleRunning} text={isRunning ? 'Пауза' : 'Старт'}/>
+        <Button onClick={reset} text='Сброс'/>
+      </SC.ButtonWrapper>
+
       {phase === PHASES.FINISHED && <p><b>Программа завершена!</b></p>}
     </div>
   )
