@@ -11,6 +11,5 @@ export function playBeep() {
     oscillator.onended = () => ac.close();
   } catch (e) {
     console.warn('AudioContext not supported or blocked', e);
-
   }
 }

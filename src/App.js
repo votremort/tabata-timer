@@ -89,8 +89,6 @@ function App() {
         </SC.Section>
       </div>
     </Container>
-
   );
 }
-
 export default App;

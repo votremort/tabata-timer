@@ -26,12 +26,3 @@ export function deleteProgram(id) {
   const programs = loadPrograms().filter((p) => p.id !== id);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(programs));
 }
-
-// //обновление
-// export function updateProgram(updatedProgram) {
-//   const programs = loadPrograms().map((p) => {
-//     if (p.id === updatedProgram.id) return updatedProgram;
-//     return p;
-//   });
-//   localStorage.setItem(STORAGE_KEY, JSON.stringify(programs));
-// }
