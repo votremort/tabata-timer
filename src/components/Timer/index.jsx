@@ -111,7 +111,6 @@ export const Timer = ({ program }) => {
         <Button onClick={toggleRunning} text={isRunning ? 'Пауза' : 'Старт'}/>
         <Button onClick={reset} text='Сброс'/>
       </SC.ButtonWrapper>
-
       {phase === PHASES.FINISHED && <p><b>Программа завершена!</b></p>}
     </div>
   )
