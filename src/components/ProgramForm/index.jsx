@@ -15,13 +15,13 @@ export const ProgramForm = ( { onSave } ) => {
     const newErrors = {};
 
     if (!isPositiveNumber(cycles)) {
-      newErrors.cycles = 'Введите положительное число циклов';
+      newErrors.cycles = 'Введите положительное и/или целое число циклов';
     };
      if (!isPositiveNumber(workDuration)) {
-      newErrors.workDuration = 'Введите положительную длительность работы';
+      newErrors.workDuration = 'Введите положительную и/или целое длительность работы';
     };
      if (!isPositiveNumber(restDuration)) {
-      newErrors.restDuration = 'Введите положительную длительность отдыха';
+      newErrors.restDuration = 'Введите положительную и/или целое длительность отдыха';
     };
 
     setErrors(newErrors);
@@ -33,9 +33,9 @@ export const ProgramForm = ( { onSave } ) => {
     if (!validate()) return;
 
     onSave({
-      cycles: Number(cycles),
-      workDuration: Number(workDuration),
-      restDuration: Number(restDuration),
+      cycles: parseInt(cycles),
+      workDuration: parseInt(workDuration),
+      restDuration: parseInt(restDuration),
     });
 
     setCycles('');
@@ -85,7 +85,7 @@ export const ProgramForm = ( { onSave } ) => {
               value={restDuration}
               onChange={(e) => setRestDuration(e.target.value)}
             />
-            { errors.workDuration && <div>{errors.restDuration}</div> }
+            { errors.restDuration && <div>{errors.restDuration}</div> }
           </label>
         </div>
         <Button type="submit" text='Сохранить программу' />
