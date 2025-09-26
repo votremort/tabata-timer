@@ -3,7 +3,7 @@ const STORAGE_KEY = 'savedPrograms';
 export function saveProgram(program) {
   const programs = loadPrograms();
 
-  const programWithId = { ...program, id: Date.now().toString() };
+  const programWithId = { ...program, id: (Date.now() + Math.random()).toString() };
   programs.push(programWithId);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(programs));
   console.log('test save program')
